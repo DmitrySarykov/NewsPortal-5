@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости за неделю</title>
+</head>
+<body>
+    <h2>Здравствуй! Новые статьи в твоём любимом разделе за неделю!</h2>
+    <hr>
+    {% for news in news_list %}
+        <div>
+            <h2><a href="http://{{site.domain}}:8000{% url 'news_detail' news.pk %}">{{ news.title }}</a></h2>
+            <p><i>{{ news.date|date:'d M Y' }}</i></p>
+            <div>{{ news.text|truncatechars:200 }}</div>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+{{ category.name}}
+{% endblock title %}
+ 
+{% block content %}
+    <h1>{{ category.name }}</h1>
+    <a class="btn btn-primary text-uppercase" href="{% url 'category_subscribe' category.pk %}">Подписаться</a>
+    <p class="post-meta">Подписчики: {{ category.subscribers.all|join:', ' }}<p>
+    <hr>
+    {% for news in category.post_set.all %}
+    <!-- Post preview-->
+    <div class="post-preview">
+        <a href="post.html">
+            <h2 class="post-title"><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h2>
+            <h4 class="post-subtitle">{{ news.text|truncatechars:50 }}</h4>
+        </a>
+        <p class="post-meta"><i>{{ news.date|date:'d M Y' }}</i> 
+            <a href="{% url 'news_edit' news.pk %}">Редактировать</a>
+            <a href="{% url 'news_delete' news.pk %}">Удалить</a>
+        </p>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% block title %}
+{{ news.title }}
+{% endblock title %}
+ 
+{% block content %}
+    <h1>Создать статью</h1>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <p><label>Дата {{ form.date }}</label></p>
+        <p><label>Автор {{ form.author }}</label></p>
+        <p><label>Тип {{ form.type }}</label></p>
+        <p><label>Категория {{ form.category }}</label></p>
+        <p><label>Название {{ form.title }}</label></p>
+        <p><label>Текст {{ form.text }}</label></p>
+        <p><label>Рейтинг {{ form.rating }}</label></p>
+        <br>
+        {% if request.path == '/news/add/'%}
+        <div class="d-flex justify-content-center mb-4"><input class="btn btn-primary text-uppercase" type="submit" value="Добавить статью"></div>
+        {% else %}
+        <div class="d-flex justify-content-center mb-4"><input class="btn btn-primary text-uppercase" type="submit" value="Сохранить статью"></div>
+        {% endif %}
+    </form>
+
+{% endblock content %}

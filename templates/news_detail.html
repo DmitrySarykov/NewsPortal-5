@@ -1,0 +1,17 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% block title %}
+{{ news.title }}
+{% endblock title %}
+ 
+{% block content %}
+    <h1>{{ news.title|censor }}</h1>
+    <hr>
+    <p><i>{{ news.date|date:'d-M-Y H:i' }}</i></p>
+    <p>{{ news.text|censor }}</p>
+    <b>Категории: 
+        {% for category in news.category.all %}
+        <a href="{% url 'category_detail' category.pk %}">{{category.name}}</a>
+        {% endfor%}
+    </b> 
+{% endblock content %}
